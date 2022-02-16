@@ -2,22 +2,194 @@
 
 .navigation {
 
+  background-color: $primary;
+  border-radius: 18px;
+  padding: 48px 32px 32px 32px;
+  position: relative;
+  transition: all .3s ease-out;
+
+  .bullet {
+
+    display: flex;
+    position: absolute;
+    top: 12px;
+    left: 12px;
+
+    &__icon {
+
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: white;
+      margin-right: 6px;
+
+    }
+    &__close {
+
+      background-color: #FE6158;
+
+    }
+    &__resize {
+
+      background-color: #FDBE30;
+
+    }
+    &__full {
+
+      background-color: #29C840;
+
+    }
+
+  }
+
+  .btn {
+
+    &__resize {
+
+      cursor: pointer;
+      background-color: $secondary;
+      border: none;
+      height: 32px;
+      width: 32px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      position: absolute;
+      top: 56px;
+      right: 0;
+      transform: translateX(50%) rotate(180deg);
+      transition: transform .3s ease-out;
+
+    }
+
+  }
+
+  &__logo {
+
+    width: 48px;
+    height: 48px;
+    background-color: white;
+    border-radius: 16px;
+    position: relative;
+
+    &::before,
+    &::after{
+
+      content: '';
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background-color: $primary;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+    }
+    &::after {
+
+      width: 8px;
+      height: 8px;
+      background-color: white;
+
+    }
+
+  }
+
   &__list {
 
     list-style: none;
+    margin: 0;
+    margin-top: 32px;
     padding: 0;
     display: flex;
+    flex-direction: column;
+    width: 250px;
+    transition: all .3s ease-out;
 
   }
   &__el {
 
-    padding: 20px;
+    margin: 8px 0;
+    position: relative;
+    border-radius: 12px;
+    transition: all .3s ease-out;
+    &.active {
 
-    & a {
+      .navigation__link {
 
-      color: $secondary;
-      text-decoration: none;
-      font-family: sans-serif;
+        color: white;
+        font-weight: 600;
+        background-color: $secondary;
+
+      }
+      svg {
+
+        fill: white;
+
+      }
+
+    }
+
+  }
+  &__link {
+
+    color: $secondary-10;
+    text-decoration: none;
+    font-family: sans-serif;
+    font-weight: 400;
+    padding: 12px 12px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+
+    span {
+
+      display: block;
+      margin-left: 8px;
+
+    }
+    &:hover {
+
+      color: white;
+      font-weight: 600;
+      background-color: $secondary;
+
+      svg {
+
+        fill: white;
+
+      }
+    }
+
+  }
+
+  &.-small {
+
+    .btn {
+
+      &__resize {
+
+        transform: translateX(50%) rotate(0deg);
+
+      }
+
+    }
+
+    .navigation__list {
+
+      width: 48px;
+
+    }
+
+    .navigation__link {
+
+      span {
+
+        display: none;
+
+      }
 
     }
 
