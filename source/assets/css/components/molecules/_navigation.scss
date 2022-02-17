@@ -115,6 +115,50 @@
     position: relative;
     border-radius: 12px;
     transition: all .3s ease-out;
+
+    &::before {
+
+      content: attr(data-title);
+      color: white;
+      font-weight: 500;
+      background-color: $primary;
+      border: 2px solid $secondary;
+      border-radius: 12px;
+      padding: 8px 16px;
+      position: absolute;
+      left: 56px;
+      top: 50%;
+      transform: translate(-20px, -50%);
+      opacity: 0;
+      display: none;
+
+      animation: animBefore .3s ease-out forwards;
+
+      @keyframes animBefore {
+
+        0% {
+
+          opacity: 0;
+          transform: translate(-20px, -50%);
+
+        }
+        100% {
+
+          opacity: 1;
+          transform: translate(0, -50%);
+        }
+
+      }
+
+    }
+
+    .chevron {
+
+      fill: $secondary-10;
+      transform: rotate(90deg);
+
+    }
+
     &.active {
 
       .navigation__link {
@@ -123,23 +167,40 @@
         font-weight: 600;
         background-color: $secondary;
 
-      }
-      svg {
+        svg {
 
-        fill: white;
+          fill: white;
+
+        }
+
+      }
+
+    }
+    &.open {
+
+      .chevron {
+
+        transform: rotate(-90deg);
+
+      }
+
+      .navigation__subList {
+
+        display: block;
 
       }
 
     }
 
   }
-  &__link {
+  &__link,
+  &__subLink {
 
     color: $secondary-10;
     text-decoration: none;
-    font-family: sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-weight: 400;
-    padding: 12px 12px;
+    padding: 12px;
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -163,6 +224,136 @@
       }
     }
 
+    &.-badge {
+
+      justify-content: space-between;
+
+    }
+
+  }
+  &__linkBadge {
+
+    display: flex;
+    align-items: center;
+
+  }
+  &__subList {
+
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    padding-left: 32px;
+    position: relative;
+    margin-top: 8px;
+    display: none;
+
+    &::after {
+
+      content:'';
+      height: calc(100% - 32px);
+      width: 2px;
+      background-color: $secondary;
+      position: absolute;
+      left: 16px;
+      top: 8px;
+
+      animation: grow .7s ease-out;
+
+      @keyframes grow {
+
+        0% {
+
+          height: 0;
+
+        }
+        100% {
+
+          height: calc(100% - 32px);
+
+        }
+
+      }
+
+    }
+
+  }
+  &__subEl {
+    position: relative;
+    margin: 8px 0;
+    opacity: 0;
+    transform: translateX(-30px);
+
+    animation: animEl .3s ease-out forwards;
+
+    @keyframes animEl {
+
+      0% {
+
+        opacity: 0;
+        transform: translateX(-30px);
+
+      }
+      100% {
+
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+    }
+
+    &:first-child {
+
+      animation-delay: 0s !important;
+
+    }
+
+    &::before {
+
+      content: '';
+      width: 16px;
+      height: 2px;
+      background-color: $secondary;
+      position: absolute;
+      left: -16px;
+      top: 50%;
+      border-bottom-left-radius: 16px;
+      transform: translateY(-50%);
+
+    }
+
+  }
+  &__subLink {
+
+    padding: 12px;
+    justify-content: space-between;
+
+    span {
+
+      margin-left: 0;
+
+    }
+    svg {
+
+      opacity: 0;
+      transition: opacity .3s ease-out;
+
+    }
+
+    &:hover {
+
+      color: white;
+      font-weight: 600;
+      background-color: $secondary;
+
+      svg {
+
+        fill: white;
+        opacity: 1;
+
+      }
+
+    }
+
   }
 
   &.-small {
@@ -172,6 +363,35 @@
       &__resize {
 
         transform: translateX(50%) rotate(0deg);
+
+      }
+
+    }
+
+    .navigation__el {
+
+      .chevron {
+
+        display: none;
+
+      }
+
+      &:hover {
+
+        &::before {
+
+          display: inline-block;
+
+        }
+
+      }
+      &.open {
+
+        &::before {
+
+          display: inline-block;
+
+        }
 
       }
 
@@ -192,7 +412,40 @@
       }
 
     }
+    .badge {
+
+      display: none;
+
+    }
+    .navigation__subList {
+
+      position: absolute;
+      left: 0;
+      padding: 16px 16px 16px 32px;
+      width: 150px;
+      background-color: $primary;
+      z-index: 1000;
+      border-radius: 16px;
+      border: 2px solid $secondary;
+      -webkit-box-shadow: 18px 33px 62px 9px rgba(26,28,30,0.5);
+      -moz-box-shadow: 18px 33px 62px 9px rgba(26,28,30,0.5);
+      box-shadow: 18px 33px 62px 9px rgba(26,28,30,0.5);
+
+      &::after {
+
+        height: calc(100% - 64px);
+        left: 16px;
+        top: 16px;
+
+      }
+
+    }
 
   }
 
+}
+@for $i from 1 through 10 {
+  .navigation__subList .navigation__subEl:nth-child(#{$i}n) {
+    animation-delay: #{$i * 0.1}s;
+  }
 }

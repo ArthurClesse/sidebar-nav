@@ -1,0 +1,3 @@
+{% macro badge(title, modifiers) %}
+    <div class="badge {% if modifiers %} {{ modifiers }}{% endif %}">{{ title }}</div>
+{% endmacro %}
